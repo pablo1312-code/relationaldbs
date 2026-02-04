@@ -21,6 +21,8 @@ dependencies {
     // Source: https://mvnrepository.com/artifact/org.postgresql/postgresql
 implementation("org.postgresql:postgresql:42.7.8")
 
+// Source: https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+implementation("ch.qos.logback:logback-classic:0.9.26")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 

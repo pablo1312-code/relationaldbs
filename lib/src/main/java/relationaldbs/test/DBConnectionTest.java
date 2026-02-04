@@ -1,97 +1,85 @@
 package relationaldbs.test;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
-
 import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * 
+ * @author panblo
+ * 4 feb 2026
+ */
 public class DBConnectionTest {
 
-// The direction of the database that we are going to connect
-
-	private static String postgresqlURL = "jdbc:postgresql://localhost:5432/postgres?";
-
+	private final static String postgresqlURL = "jdbc:postgresql://localhost:5432/postgres";
+// "jdbc:postgresql://192.168.1.170.5432/sample?ssl=true";
 	private static String username = "postgres";
+	private static String password = "Admin";
 
-	private static String password = "admin";
-
-	public static void main(String[] args) throws SQLException {
-
+	public static void main(String[] args) {
 		try {
-
-			// Obtain a object class "Connection" Which represents a connection with a
-
-			// specific database
-
 			Connection conn = DriverManager.getConnection(postgresqlURL, username, password);
-
-			System.out.println("the address of the connection object is " + conn);
-
-			// Create a new database
-
-			// The following SQL statement is used to send the SQL statement to the database
+			System.out.println("the address of the connection object is" + conn);
 
 			createDatabase(conn);
-
-			String createTableSOL = "create table if not exists users(" + "id integer not null,"
-
-					+ "usenname VARCHAR(255), " + "psw VARCHAR(255)," + "isVIP TINYINT(1)," + "balance FLOAT,"
-
+			String dropTableSQL = "drop table if exists users";
+			PreparedStatement ps = conn.prepareStatement(dropTableSQL);
+			ps.executeUpdate();
+			ps.close();
+// table creation sql
+			String createTableSQL = "create table if not exists users(" + "id integer not null,"
+					+ "usenname VARCHAR(255), " + "psw VARCHAR(255)," + "isVIP boolean," + "balance numeric,"
 					+ "PRIMARY KEY (id)" + ")";
+			PreparedStatement ps1 = conn.prepareStatement(createTableSQL);
+			ps1.executeUpdate();
+			ps1.close();
+// insert sql
+			String insertSQL = "insert into users(id,usenname,psw, isVIP, balance) values ('19','Pablo',1243,true,224.5),('20','Jorge','121',false,234.9)";
 
-			// insert sql
+			PreparedStatement ps11 = conn.prepareStatement(insertSQL);
+			System.out.println(ps11.executeUpdate());
+			ps11.close();
+// delete sql
 
-			String insertsol = "insert into users values (10, 'Manolo',"
+			selectByName(conn, "Manolo");
 
-					+ " 12343', 1, 234.3), (20, 'Alejandro', '123', 1, 234.3)";
-
-			// delete sql
-
-			String deleteSQL = "DELETE FROM users WHERE username = 'Alejandro'";
-
-			// select psw, isVIP from users where username = 'posgres' ;
-
-			String selectSQL = "select * from users where username = 'Manolo'";
+			deleteByName(conn, "Sandra");
 
 		} catch (SQLException e) {
-
+// TODO Auto-generated catch block
 			e.printStackTrace();
-
 		}
 
+	}
+
+	private static void selectByName(Connection conn, String name) throws SQLException {
+// TODO Auto-generated method stub
+		String selectSQL = "select * from users where usenname =" + name;
+		PreparedStatement ps3 = conn.prepareStatement(selectSQL);
+		System.out.println();
+		ResultSet rs = ps3.executeQuery();
+
+	}
+
+	private static void deleteByName(Connection conn, String name) throws SQLException {
+// TODO Auto-generated method stub
+		String deleteSQL = "DELETE FROM users WHERE usenname = " + name;
+// select psw, isVIP from users where username = 'Muñecos' ;
+		PreparedStatement ps2 = conn.prepareStatement(deleteSQL);
+		System.out.println(ps2.executeUpdate());
+		ps2.close();
 	}
 
 	private static void createDatabase(Connection conn) {
-
+// TODO Auto-generated method stub
 		try {
-
-			String dbCreationSQL = "CREATE DATABASE happylearning";
-
-			// This one is for postgress sql
-
-			// "CREATE DATABASE happylearning";
-
+			String dbCreationSQL = "CREATE DATABASE  ";
 			PreparedStatement ps = conn.prepareStatement(dbCreationSQL);
-
-			// ps.executeupdate() is used to execute SQL statements that change the database
-
-			// such as CREATE, INSERT, UPDATE, DELETE statements
-
 			ps.executeUpdate();
-
 		} catch (Exception e) {
-
-			// TODO: handle exception
-			
-			
-			
-			
-
+			e.printStackTrace();
+// TODO: handle exception
 		}
-
 	}
-
 }
