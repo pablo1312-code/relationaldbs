@@ -18,7 +18,7 @@ public class DBConnectionTest {
 
 	private static String password = "admin";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 
 		try {
 
@@ -36,35 +36,25 @@ public class DBConnectionTest {
 
 			createDatabase(conn);
 
-			try {
+			String createTableSOL = "create table if not exists users(" + "id integer not null,"
 
-				// table creation sl
+					+ "usenname VARCHAR(255), " + "psw VARCHAR(255)," + "isVIP TINYINT(1)," + "balance FLOAT,"
 
-				String createTableSOL = "create table if not exists users(" + "id integer not null,"
+					+ "PRIMARY KEY (id)" + ")";
 
-						+ "usenname VARCHAR(255), " + "psw VARCHAR(255)," + "isVIP TINYINT(1)," + "balance FLOAT,"
+			// insert sql
 
-						+ "PRIMARY KEY (id)" + ")";
+			String insertsol = "insert into users values (10, 'Manolo',"
 
-				// insert sal
+					+ " 12343', 1, 234.3), (20, 'Alejandro', '123', 1, 234.3)";
 
-				String insertsol = "insert into users values (10, 'Manolo',"
+			// delete sql
 
-						+ " 12343', 1, 234.3), (20, 'Alejandro', '123', 1, 234.3)";
+			String deleteSQL = "DELETE FROM users WHERE username = 'Alejandro'";
 
-				// delete sql
+			// select psw, isVIP from users where username = 'posgres' ;
 
-				String deleteSQL = "DELETE FROM users WHERE username = 'Alejandro'";
-
-				// select psw, isVIP from users where username = 'posgres' ;
-
-				String selectSQL = "select * from users where username = 'Manolo'";
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-
-			}
+			String selectSQL = "select * from users where username = 'Manolo'";
 
 		} catch (SQLException e) {
 
@@ -95,6 +85,10 @@ public class DBConnectionTest {
 		} catch (Exception e) {
 
 			// TODO: handle exception
+			
+			
+			
+			
 
 		}
 
