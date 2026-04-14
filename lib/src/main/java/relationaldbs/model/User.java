@@ -74,6 +74,18 @@ public class User {
 		
 		
 	}
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public boolean isVIP() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public double getBalance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
 	
