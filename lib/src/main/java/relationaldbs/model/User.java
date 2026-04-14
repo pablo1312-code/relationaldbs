@@ -32,10 +32,10 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getPhonenumber() {
+	public int getPhonenumber() {
 		return phonenumber;
 	}
-	public void setPhonenumber(String phonenumber) {
+	public void setPhonenumber(int phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 	public String getEmail() {
@@ -56,9 +56,24 @@ public class User {
 	private String surname;
 	private String age;
 	private String gender;
-	private String phonenumber;
+	private int phonenumber;
 	private String email;
 	private String subscription;
+	
+	
+	//constructors
+	public User(long id, String name, String surname, String age, String gender, int phonenumber, String email, String subscription) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.age = age;
+		this.gender = gender;
+		this.phonenumber = phonenumber;
+		this.email = email;
+		this.subscription = subscription;
+		
+		
+	}
 	
 }
 	
