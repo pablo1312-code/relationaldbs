@@ -45,6 +45,7 @@ public class DBConnectionTest {
 			selectByName(conn, "Manolo");
 
 			deleteByName(conn, "Sandra");
+			
 
 		} catch (SQLException e) {
 // TODO Auto-generated catch block

@@ -16,6 +16,7 @@ import relationaldbs.model.*;
 
 
 
+
 /**
 
  * 
@@ -43,6 +44,8 @@ public class UserDaoImpl implements UserDao{
 
 
     private static String password = "admin" ;
+    static String dropTableSQL = "drop table if exists users";
+    static String createTableSQL = "create table if not exists users(id int auto_incremental,";
 
 
 
@@ -62,17 +65,17 @@ public class UserDaoImpl implements UserDao{
          * us to prepare, send and execute sqls 
          */
 				PreparedStatement ps =
-						conn.prepareStatement(insertSQL)) {
+			conn.prepareStatement(insertSQL)) {
         	ps.setString(1, user.getName());
         	ps.setString(2, user.getPassword());
         	ps.setBoolean(3, user.isVIP());
         	ps.setDouble(4, user.getBalance());
-        	ps.setString(5, user.getAge());
+        	((PreparedStatement) ps).setInt(5, user.getAge());
         	ps.setString(6, user.getEmail());
         	ps.setString(7, user.getGender());
         	ps.setString(8, user.getSubscription());
         	ps.setInt(9, user.getPhonenumber());
-		
+		ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,6 +86,7 @@ public class UserDaoImpl implements UserDao{
 
 
 	public boolean delete(long id) {
+		
 
 		// TODO Auto-generated method stub
 

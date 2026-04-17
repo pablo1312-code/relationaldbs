@@ -20,10 +20,10 @@ public class User {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 	public String getGender() {
@@ -54,7 +54,7 @@ public class User {
 	private long id;
 	private String name;
 	private String surname;
-	private String age;
+	private int age;
 	private String gender;
 	private int phonenumber;
 	private String email;
@@ -62,7 +62,7 @@ public class User {
 	
 	
 	//constructors
-	public User(long id, String name, String surname, String age, String gender, int phonenumber, String email, String subscription) {
+	public User(long id, String name, String surname, int age, String gender, int phonenumber, String email, String subscription) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
